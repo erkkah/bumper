@@ -58,7 +58,9 @@ def os_db_path():
     if platform.system() == "Windows":
         return os.path.join(os.getenv("APPDATA"), "bumper.db")
     else:
-        return os.path.expanduser("~/.config/bumper.db")
+        confdir = os.path.expanduser("~/.config")
+        os.makedirs(confdir, exist_ok=True)
+        return os.path.expanduser(f"{confdir}/bumper.db")
 
 
 def db_get():

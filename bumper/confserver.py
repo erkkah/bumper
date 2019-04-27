@@ -37,10 +37,11 @@ logging.getLogger("aiohttp.access").addFilter(aiohttp_filter())
 
 
 class ConfServer:
-    def __init__(self, address, usessl=False, helperbot=None):
+    def __init__(self, address, announce=None, usessl=False, helperbot=None):
         self.helperbot = helperbot
         self.usessl = usessl
         self.address = address
+        self.announce = announce or socket.gethostbyname(socket.gethostname())
         self.confthread = None
         self.run_async = False
         self.app = None
@@ -600,7 +601,7 @@ class ConfServer:
                 service = postbody["service"]
                 if service == "EcoMsgNew":
 
-                    srvip = socket.gethostbyname(socket.gethostname())
+                    srvip = self.announce
                     msgserver = {"ip": srvip, "port": 5223, "result": "ok"}
                     msgserver = json.dumps(msgserver)
                     msgserver = msgserver.replace(

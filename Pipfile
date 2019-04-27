@@ -8,6 +8,7 @@ hbmqtt = "*"
 aiohttp = "*"
 tinydb = "*"
 pyyaml = ">=4.2b1"
+contextvars = "*"
 
 [dev-packages]
 black = "*"
